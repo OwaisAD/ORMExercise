@@ -85,6 +85,8 @@ public class Semester {
     }
 
     public void removeTeacher(Teacher teacher) {
-
+        if(teacher != null) {
+            teachers.remove(teacher);
+        }
     }
 }

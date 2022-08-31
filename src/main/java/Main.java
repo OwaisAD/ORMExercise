@@ -35,16 +35,19 @@ public class Main {
         //Student studentToSemester = teachingFacade.addStudentToSemester(6, 3);
         //System.out.println("Adding a student to a semester\n" + studentToSemester);
 
-        // Add a teacher to a semester MANGLER
-        Teacher teacherToSemester = teachingFacade.addTeacherToSemester(1, 2);
-        System.out.println("Adding a teacher to a semester\n" + teacherToSemester);
+        // Add a teacher to a semester
+        //Teacher teacherToSemester = teachingFacade.addTeacherToSemester(1, 2);
+        //System.out.println("Adding a teacher to a semester\n" + teacherToSemester);
 
-        // Remove teacher from a semester MANGLER clear row from TEACHER_SEMESTER table
-
+        // Remove teacher from a semester
+        teachingFacade.removeTeacherFromSemester(3,1);
 
         // Update a semesters name and description MANGLER
+        Semester changeSemesterData = teachingFacade.updateSemesterNameAndDesc(4,"Datamatiker 4. sem", "CLdat-41e");
+        System.out.println(changeSemesterData);
 
         // Get all students from a semester MANGLER
+
 
         // Get all students by a specific teacher MANGLER
 

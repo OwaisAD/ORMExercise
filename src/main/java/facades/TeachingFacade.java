@@ -108,6 +108,18 @@ public class TeachingFacade {
     }
 
     // Update a semesters name and description
+    public Semester updateSemesterNameAndDesc(long semesterId, String description, String name) {
+        EntityManager em = emf.createEntityManager();
+
+        Semester semester = em.find(Semester.class, semesterId);
+
+        em.getTransaction().begin();
+            semester.setDescription(description);
+            semester.setName(name);
+        em.getTransaction().commit();
+        em.close();
+        return semester;
+    }
 
     // Get all students from a semester
 
