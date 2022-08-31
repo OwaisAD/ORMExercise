@@ -9,17 +9,17 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
-public class TeachingFacade {
+public class SchoolFacade {
 
-    private static TeachingFacade instance;
+    private static SchoolFacade instance;
     private static EntityManagerFactory emf;
 
-    private TeachingFacade() {} // Private constructor
+    private SchoolFacade() {} // Private constructor
 
-    public static TeachingFacade getInstance(EntityManagerFactory _emf) { //dependency injection
+    public static SchoolFacade getInstance(EntityManagerFactory _emf) { //dependency injection
         if(instance == null) {
             emf = _emf;
-            instance = new TeachingFacade();
+            instance = new SchoolFacade();
         }
         return instance;
     }
