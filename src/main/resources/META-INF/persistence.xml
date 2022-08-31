@@ -15,6 +15,11 @@
             <property name="javax.persistence.jdbc.password" value="ax2"/>
             <property name="javax.persistence.schema-generation.database.action" value="create"/>
             <!--value="create" betyder, hvis tabellen ikke findes så opret den, der findes også en der hedder drop-and-create som sletter og opretter tabellen-->
+            <!--med de nedenstående properties kan man se hvilke queries den genererer-->
+            <!--<property name="eclipselink.logging.level" value="FINE"/>
+            <property name="eclipselink.logging.level.sql" value="FINE"/>
+            <property name="eclipselink.logging.parameters" value="true" />
+            -->
         </properties>
     </persistence-unit>
 </persistence>

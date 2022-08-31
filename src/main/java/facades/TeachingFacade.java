@@ -88,13 +88,24 @@ public class TeachingFacade {
         Semester semester = em.find(Semester.class, semesterId);
 
         em.getTransaction().begin();
-            teacher.getSemesters().add(semester);
+            teacher.assignSemester(semester);
         em.getTransaction().commit();
         em.close();
         return teacher;
     }
 
     // Remove teacher from a semester
+    public void removeTeacherFromSemester(long teacherId, long semesterId) {
+        EntityManager em = emf.createEntityManager();
+
+        Teacher teacher = em.find(Teacher.class, teacherId);
+        Semester semester = em.find(Semester.class, semesterId);
+
+        em.getTransaction().begin();
+        semester.removeTeacher(teacher);
+        em.getTransaction().commit();
+        em.close();
+    }
 
     // Update a semesters name and description
 

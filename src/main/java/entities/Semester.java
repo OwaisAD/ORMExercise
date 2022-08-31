@@ -83,4 +83,8 @@ public class Semester {
                 ", name='" + name + '\'' +
                 '}';
     }
+
+    public void removeTeacher(Teacher teacher) {
+
+    }
 }

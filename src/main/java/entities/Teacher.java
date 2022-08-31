@@ -2,6 +2,7 @@ package entities;
 
 import javax.persistence.*;
 import java.util.LinkedHashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -62,6 +63,25 @@ public class Teacher {
 
     public void setSemesters(Set<Semester> semesters) {
         this.semesters = semesters;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Teacher)) return false;
+        Teacher teacher = (Teacher) o;
+        return getId().equals(teacher.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId());
+    }
+
+    public void assignSemester(Semester semester) {
+        if(semester != null) {
+            semester.getTeachers().add(this);
+        }
     }
 
     @Override

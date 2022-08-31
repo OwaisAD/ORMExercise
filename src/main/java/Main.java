@@ -36,8 +36,8 @@ public class Main {
         //System.out.println("Adding a student to a semester\n" + studentToSemester);
 
         // Add a teacher to a semester MANGLER
-        //Teacher teacherToSemester = teachingFacade.addTeacherToSemester(4, 2);
-        //System.out.println("Adding a teacher to a semester\n" + teacherToSemester);
+        Teacher teacherToSemester = teachingFacade.addTeacherToSemester(1, 2);
+        System.out.println("Adding a teacher to a semester\n" + teacherToSemester);
 
         // Remove teacher from a semester MANGLER clear row from TEACHER_SEMESTER table
 
