@@ -51,7 +51,12 @@ public class Main {
             System.out.println(student);
         }
 
-        // Get all students by a specific teacher MANGLER
+        // Get all students by a specific teacher
+        List<Student> listStudentsOfSpecificTeacher = schoolFacade.getStudentsFromTeacher(1);
+        System.out.println("Students of specific teacher:");
+        for (Student student : listStudentsOfSpecificTeacher) {
+            System.out.println(student);
+        }
 
         emf.close();
     }

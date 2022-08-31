@@ -132,6 +132,18 @@ public class SchoolFacade {
         return null;
     }
 
-
-    // Get all students by a specific teacher
+    // Get all students by a specific teacher - UNDER Persistence -> højre klik på PU -> åbn console -> test JPQL i console
+    public List<Student> getStudentsFromTeacher(long teacherId) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            TypedQuery<Student> query = em.createQuery(
+                    "SELECT s FROM Student s " +
+                    "JOIN s.currentsemester sem JOIN sem.teachers t " +
+                    "WHERE t.id = :id", Student.class);
+            query.setParameter("id", teacherId);
+            return query.getResultList();
+        } finally {
+            em.close();
+        }
+    }
 }
