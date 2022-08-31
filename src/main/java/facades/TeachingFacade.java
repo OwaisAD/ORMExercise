@@ -81,7 +81,18 @@ public class TeachingFacade {
     }
 
     // Add a teacher to a semester
+    public Teacher addTeacherToSemester(long teacherId, long semesterId) {
+        EntityManager em = emf.createEntityManager();
 
+        Teacher teacher = em.find(Teacher.class, teacherId);
+        Semester semester = em.find(Semester.class, semesterId);
+
+        em.getTransaction().begin();
+            teacher.getSemesters().add(semester);
+        em.getTransaction().commit();
+        em.close();
+        return teacher;
+    }
 
     // Remove teacher from a semester
 

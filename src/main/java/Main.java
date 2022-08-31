@@ -31,15 +31,16 @@ public class Main {
         //Teacher newTeacher = teachingFacade.createTeacher("Elon", "Musk");
         //System.out.println(newTeacher);
 
-        // Add a student to a semester MANGLER
-        Student studentToSemester = teachingFacade.addStudentToSemester(6, 3);
-        System.out.println("Adding a student to a semester\n" + studentToSemester);
+        // Add a student to a semester
+        //Student studentToSemester = teachingFacade.addStudentToSemester(6, 3);
+        //System.out.println("Adding a student to a semester\n" + studentToSemester);
 
         // Add a teacher to a semester MANGLER
-        //Teacher teacherToSemester = teachingFacade.addTeacherToSemester(4, 4);
+        //Teacher teacherToSemester = teachingFacade.addTeacherToSemester(4, 2);
         //System.out.println("Adding a teacher to a semester\n" + teacherToSemester);
 
         // Remove teacher from a semester MANGLER clear row from TEACHER_SEMESTER table
+
 
         // Update a semesters name and description MANGLER
 
