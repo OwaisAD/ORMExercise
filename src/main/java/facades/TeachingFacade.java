@@ -66,4 +66,21 @@ public class TeachingFacade {
         return newTeacher;
     }
 
+    // Add a student to a semester
+    public Student addStudentToSemester(long studentId, long semesterId) {
+        EntityManager em = emf.createEntityManager();
+        //get and save student from id into object and setCurrentSemester(semesterId) then persist and commit
+        return new Student();
+    }
+
+    // Add a teacher to a semester
+
+
+    // Remove teacher from a semester
+
+    // Update a semesters name and description
+
+    // Get all students from a semester
+
+    // Get all students by a specific teacher
 }

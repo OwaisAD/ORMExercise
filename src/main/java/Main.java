@@ -33,17 +33,19 @@ public class Main {
         Teacher newTeacher = teachingFacade.createTeacher("Elon", "Musk");
         System.out.println(newTeacher);
 
-        // Add a student to a semester
+        // Add a student to a semester MANGLER
+        Student studentToSemester = teachingFacade.addStudentToSemester(7, 4);
+        System.out.println("Adding a student to a semester\n" + studentToSemester);
 
-        // Add a teacher to a semester
+        // Add a teacher to a semester MANGLER
 
-        // Remove teacher from a semester
+        // Remove teacher from a semester MANGLER
 
-        // Update a semesters name and description
+        // Update a semesters name and description MANGLER
 
-        // Get all students from a semester
+        // Get all students from a semester MANGLER
 
-        // Get all students by a specific teacher
+        // Get all students by a specific teacher MANGLER
 
         emf.close();
     }
