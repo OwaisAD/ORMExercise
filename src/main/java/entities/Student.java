@@ -57,8 +57,11 @@ public class Student {
         return currentsemester;
     }
 
-    public void setCurrentsemester(Semester currentsemester) {
-        this.currentsemester = currentsemester;
+    public void assignCurrentsemester(Semester currentsemester) {
+        if(currentsemester != null) {
+            this.currentsemester = currentsemester;
+            currentsemester.getStudents().add(this); // bi-directional: sætter student ind i HashSet hos semesteret
+        }
     }
 
     @Override

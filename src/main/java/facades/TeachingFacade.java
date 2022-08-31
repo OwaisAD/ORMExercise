@@ -69,8 +69,15 @@ public class TeachingFacade {
     // Add a student to a semester
     public Student addStudentToSemester(long studentId, long semesterId) {
         EntityManager em = emf.createEntityManager();
-        //get and save student from id into object and setCurrentSemester(semesterId) then persist and commit
-        return new Student();
+
+        Student student = em.find(Student.class, studentId);
+        Semester semester = em.find(Semester.class, semesterId);
+
+        em.getTransaction().begin();
+            student.assignCurrentsemester(semester);
+        em.getTransaction().commit();
+        em.close();
+        return student;
     }
 
     // Add a teacher to a semester

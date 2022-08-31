@@ -81,8 +81,6 @@ public class Semester {
                 "id=" + id +
                 ", description='" + description + '\'' +
                 ", name='" + name + '\'' +
-                ", students=" + students +
-                ", teachers=" + teachers +
                 '}';
     }
 }
