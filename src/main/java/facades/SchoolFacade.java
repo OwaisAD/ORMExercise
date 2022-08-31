@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.TypedQuery;
 import java.util.List;
+import java.util.Set;
 
 public class SchoolFacade {
 
@@ -122,6 +123,15 @@ public class SchoolFacade {
     }
 
     // Get all students from a semester
+    public Set<Student> getStudentsFromSemester(long semesterId) {
+        EntityManager em = emf.createEntityManager();
+        Semester semester = em.find(Semester.class, semesterId);
+        if(semester != null) {
+            return semester.getStudents();
+        }
+        return null;
+    }
+
 
     // Get all students by a specific teacher
 }

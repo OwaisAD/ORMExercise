@@ -5,6 +5,7 @@ import facades.SchoolFacade;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.util.List;
+import java.util.Set;
 
 public class Main {
     public static void main(String[] args) {
@@ -17,36 +18,37 @@ public class Main {
         }
 
         // Create new students
-        //Student newStudent = teachingFacade.createStudent("Owais", "Dashti");
+        //Student newStudent = schoolFacade.createStudent("Owais", "Dashti");
         //System.out.println(newStudent);
 
         // Create new semester
-        //Semester newSemester = teachingFacade.createSemester("Computer Science 4. sem", "CLcos-v15e");
+        //Semester newSemester = schoolFacade.createSemester("Computer Science 4. sem", "CLcos-v15e");
         //System.out.println(newSemester);
 
         // Create a new teacher
-        //Teacher newTeacher = teachingFacade.createTeacher("Elon", "Musk");
+        //Teacher newTeacher = schoolFacade.createTeacher("Elon", "Musk");
         //System.out.println(newTeacher);
 
         // Add a student to a semester
-        //Student studentToSemester = teachingFacade.addStudentToSemester(6, 3);
+        //Student studentToSemester = schoolFacade.addStudentToSemester(6, 3);
         //System.out.println("Adding a student to a semester\n" + studentToSemester);
 
         // Add a teacher to a semester
-        //Teacher teacherToSemester = teachingFacade.addTeacherToSemester(1, 2);
+        //Teacher teacherToSemester = schoolFacade.addTeacherToSemester(1, 2);
         //System.out.println("Adding a teacher to a semester\n" + teacherToSemester);
 
         // Remove teacher from a semester
         schoolFacade.removeTeacherFromSemester(3,1);
 
-        // Update a semesters name and description MANGLER
+        // Update a semesters name and description - virker, men skal testes og udbedres mht. mulige inputs
         Semester changeSemesterData = schoolFacade.updateSemesterNameAndDesc(4,"Datamatiker 4. sem", "CLdat-41e");
         System.out.println(changeSemesterData);
 
         // Get all students from a semester MANGLER
-        List<Student> studentListFromSemester = schoolFacade.getStudents();
-        for (Student student : studentListFromSemester) {
-            System.out.println(student.toString());
+        Set<Student> studentSetFromSemester = schoolFacade.getStudentsFromSemester(3);
+        System.out.println("List of students from a specific semester:");
+        for (Student student : studentSetFromSemester) {
+            System.out.println(student);
         }
 
         // Get all students by a specific teacher MANGLER
