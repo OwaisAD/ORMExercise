@@ -87,10 +87,12 @@ public class Tester {
         long amountOfStudentsForTeacher = schoolFacade.amountOfStudentsWithASpecificTeacher(teacherId);
         System.out.println("Teacher with id: " + teacherId + " has the following amount of students: " + amountOfStudentsForTeacher);
 
-        // Find (using JPQL) the teacher who teaches the most semesters.
+        // Find (using JPQL) the teacher who teaches the most semesters. MANGLER
         Teacher teacher = schoolFacade.teacherWhoTeachesTheMostSemesters();
         System.out.println("Teacher teaching the most semesters:");
         System.out.println(teacher);
+
+        //Find the semester that has the fewest students MANGLER
 
 
         emf.close();

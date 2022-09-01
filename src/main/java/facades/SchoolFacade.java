@@ -209,5 +209,14 @@ public class SchoolFacade {
     }
 
     // Find the semester that has the fewest students
+    public Semester semesterWithFewestStudents() {
+        EntityManager em = emf.createEntityManager();
+        try {
+            TypedQuery<Semester> query = em.createQuery("SELECT count(sem) as amount, sem.name FROM Semester sem JOIN sem.students st GROUP BY sem.id ORDER BY amount ASC", Semester.class);
+            //return ;
+        } finally {
+            em.close();
+        }
+    }
 
 }
