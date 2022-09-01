@@ -172,11 +172,29 @@ public class SchoolFacade {
     }
 
 
-    // Find (using JPQL)  the total number of students, for a semester given the semester name as a parameter.
-
+    // Find (using JPQL) the total number of students, for a semester given the semester name as a parameter.
+    public List<Student> amountOfStudentsForASemester(String semesterName) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            TypedQuery<Student> query = em.createQuery("SELECT count(s) FROM Student s JOIN s.currentsemester sem WHERE sem.name = :name", Student.class);
+            query.setParameter("name", semesterName);
+            return query.getResultList();
+        }finally {
+            em.close();
+        }
+    }
 
     // Find (using JPQL) the total number of students that has a particular teacher.
-
+    public List<Student> amountOfStudentsWithASpecificTeacher(long teacherId) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            TypedQuery<Student> query = em.createQuery("SELECT count(s) FROM Student s JOIN s.currentsemester sem JOIN sem.teachers t WHERE t.id = :id", Student.class);
+            query.setParameter("id", teacherId);
+            return query.getResultList();
+        }finally {
+            em.close();
+        }
+    }
 
     // Find (using JPQL) the teacher who teaches the most semesters.
 
