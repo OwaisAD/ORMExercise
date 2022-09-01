@@ -160,6 +160,16 @@ public class SchoolFacade {
     }
 
     // Find (using JPQL) all Students in the system with the last name And
+    public List<Student> studentsWithSpecificLastName(String lastName) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            TypedQuery<Student> query = em.createQuery("SELECT s FROM Student s WHERE s.lastname = :name", Student.class);
+            query.setParameter("name", lastName);
+            return query.getResultList();
+        } finally {
+            em.close();
+        }
+    }
 
 
     // Find (using JPQL)  the total number of students, for a semester given the semester name as a parameter.

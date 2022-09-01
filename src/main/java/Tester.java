@@ -62,14 +62,19 @@ public class Tester {
 
 
         // Get all students with firstname Anders
-        List<Student> listOfStudentWithSpecificName = schoolFacade.studentsWithSpecificFirstName("Anders");
+        List<Student> listOfStudentWithSpecificFirstName = schoolFacade.studentsWithSpecificFirstName("Anders");
         System.out.println("Student with first name Anders");
-        for (Student student : listOfStudentWithSpecificName) {
+        for (Student student : listOfStudentWithSpecificFirstName) {
             System.out.println(student);
         }
 
 
-
+        // Get all students with lastname And
+        List<Student> listOfStudentWithSpecificLastName = schoolFacade.studentsWithSpecificLastName("And");
+        System.out.println("Student with last name And");
+        for (Student student : listOfStudentWithSpecificLastName) {
+            System.out.println(student);
+        }
 
 
 
