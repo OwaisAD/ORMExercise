@@ -197,16 +197,16 @@ public class SchoolFacade {
     }
 
     // Find (using JPQL) the teacher who teaches the most semesters.
-    /*public List<Teacher> teacherWhoTeachesTheMostSemesters() {
+    public Teacher teacherWhoTeachesTheMostSemesters() {
         EntityManager em = emf.createEntityManager();
         try {
-            //TypedQuery<Teacher> query = em.createQuery("SELECT count(t) as c from Teacher t JOIN Semester s GROUP BY t.firstname ORDER BY c DESC", Teacher.class);
-
-
+            TypedQuery<Teacher> query = em.createQuery("SELECT count(s) as amount, t.firstname as TeacherName from Semester s JOIN s.teachers t GROUP BY t.id ORDER BY amount DESC", Teacher.class);
+            // hvordan finder man ud af hvilken objekt type vi har med at gøre?
+            //return ;
         } finally {
             em.close();
         }
-    }*/
+    }
 
     // Find the semester that has the fewest students
 

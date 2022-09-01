@@ -1,12 +1,10 @@
-import entities.Semester;
 import entities.Student;
+import entities.Teacher;
 import facades.SchoolFacade;
 
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import java.sql.SQLOutput;
 import java.util.List;
-import java.util.Set;
 
 public class Tester {
     public static void main(String[] args) {
@@ -81,9 +79,18 @@ public class Tester {
         String semesterName = "CLdat-b14e";
         long amountOfStudentsForASemester = schoolFacade.amountOfStudentsForASemester(semesterName);
         System.out.println("For the semester: " + semesterName + ", there are the following amount of students: " + amountOfStudentsForASemester);
-        //
 
 
+
+        // the total number of students that has a particular teacher
+        long teacherId = 2;
+        long amountOfStudentsForTeacher = schoolFacade.amountOfStudentsWithASpecificTeacher(teacherId);
+        System.out.println("Teacher with id: " + teacherId + " has the following amount of students: " + amountOfStudentsForTeacher);
+
+        // Find (using JPQL) the teacher who teaches the most semesters.
+        Teacher teacher = schoolFacade.teacherWhoTeachesTheMostSemesters();
+        System.out.println("Teacher teaching the most semesters:");
+        System.out.println(teacher);
 
 
         emf.close();
