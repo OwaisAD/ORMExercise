@@ -1,3 +1,4 @@
+import entities.Semester;
 import entities.Student;
 import entities.Teacher;
 import facades.SchoolFacade;
@@ -93,7 +94,9 @@ public class Tester {
         System.out.println(teacher);
 
         //Find the semester that has the fewest students MANGLER
-
+        Semester semester = schoolFacade.semesterWithFewestStudents();
+        System.out.println("Semester with fewest students:");
+        System.out.println(semester);
 
         emf.close();
     }

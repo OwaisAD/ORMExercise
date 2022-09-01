@@ -213,7 +213,9 @@ public class SchoolFacade {
         EntityManager em = emf.createEntityManager();
         try {
             TypedQuery<Semester> query = em.createQuery("SELECT count(sem) as amount, sem.name FROM Semester sem JOIN sem.students st GROUP BY sem.id ORDER BY amount ASC", Semester.class);
-            //return ;
+            List<Semester> list = query.getResultList();
+            Semester semester = list.get(0);
+            return semester;
         } finally {
             em.close();
         }
