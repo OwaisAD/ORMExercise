@@ -62,24 +62,25 @@ public class Tester {
 
 
         // Get all students with firstname Anders
-        List<Student> listOfStudentWithSpecificFirstName = schoolFacade.studentsWithSpecificFirstName("Anders");
+        /*List<Student> listOfStudentWithSpecificFirstName = schoolFacade.studentsWithSpecificFirstName("Anders");
         System.out.println("Student with first name Anders");
         for (Student student : listOfStudentWithSpecificFirstName) {
             System.out.println(student);
-        }
+        }*/
 
 
         // Get all students with lastname And
-        List<Student> listOfStudentWithSpecificLastName = schoolFacade.studentsWithSpecificLastName("And");
+        /*List<Student> listOfStudentWithSpecificLastName = schoolFacade.studentsWithSpecificLastName("And");
         System.out.println("Student with last name And");
         for (Student student : listOfStudentWithSpecificLastName) {
             System.out.println(student);
-        }
+        }*/
 
 
         //total number of students, for a semester given the semester name as a parameter.
-
-
+        String semesterName = "CLdat-b14e";
+        long amountOfStudentsForASemester = schoolFacade.amountOfStudentsForASemester(semesterName);
+        System.out.println("For the semester: " + semesterName + ", there are the following amount of students: " + amountOfStudentsForASemester);
         //
 
 

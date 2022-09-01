@@ -173,31 +173,40 @@ public class SchoolFacade {
 
 
     // Find (using JPQL) the total number of students, for a semester given the semester name as a parameter.
-    public List<Student> amountOfStudentsForASemester(String semesterName) {
+    public Long amountOfStudentsForASemester(String semesterName) {
         EntityManager em = emf.createEntityManager();
         try {
-            TypedQuery<Student> query = em.createQuery("SELECT count(s) FROM Student s JOIN s.currentsemester sem WHERE sem.name = :name", Student.class);
+            TypedQuery<Long> query = em.createQuery("SELECT count(s) as amount FROM Student s JOIN s.currentsemester sem WHERE sem.name = :name", Long.class);
             query.setParameter("name", semesterName);
-            return query.getResultList();
+            return query.getSingleResult();
         }finally {
             em.close();
         }
     }
 
     // Find (using JPQL) the total number of students that has a particular teacher.
-    public List<Student> amountOfStudentsWithASpecificTeacher(long teacherId) {
+    public Long amountOfStudentsWithASpecificTeacher(long teacherId) {
         EntityManager em = emf.createEntityManager();
         try {
-            TypedQuery<Student> query = em.createQuery("SELECT count(s) FROM Student s JOIN s.currentsemester sem JOIN sem.teachers t WHERE t.id = :id", Student.class);
+            TypedQuery<Long> query = em.createQuery("SELECT count(s) as amount FROM Student s JOIN s.currentsemester sem JOIN sem.teachers t WHERE t.id = :id", Long.class);
             query.setParameter("id", teacherId);
-            return query.getResultList();
+            return query.getSingleResult();
         }finally {
             em.close();
         }
     }
 
     // Find (using JPQL) the teacher who teaches the most semesters.
+    /*public List<Teacher> teacherWhoTeachesTheMostSemesters() {
+        EntityManager em = emf.createEntityManager();
+        try {
+            //TypedQuery<Teacher> query = em.createQuery("SELECT count(t) as c from Teacher t JOIN Semester s GROUP BY t.firstname ORDER BY c DESC", Teacher.class);
 
+
+        } finally {
+            em.close();
+        }
+    }*/
 
     // Find the semester that has the fewest students
 
