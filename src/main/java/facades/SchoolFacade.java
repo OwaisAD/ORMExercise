@@ -146,4 +146,31 @@ public class SchoolFacade {
             em.close();
         }
     }
+
+    // Find all Students in the System with the first name Anders
+    public List<Student> studentsWithSpecificFirstName(String firstName) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            TypedQuery<Student> query = em.createQuery("SELECT s FROM Student s WHERE s.firstname = :name", Student.class);
+            query.setParameter("name", firstName);
+            return query.getResultList();
+        } finally {
+            em.close();
+        }
+    }
+
+    // Find (using JPQL) all Students in the system with the last name And
+
+
+    // Find (using JPQL)  the total number of students, for a semester given the semester name as a parameter.
+
+
+    // Find (using JPQL) the total number of students that has a particular teacher.
+
+
+    // Find (using JPQL) the teacher who teaches the most semesters.
+
+
+    // Find the semester that has the fewest students
+
 }
