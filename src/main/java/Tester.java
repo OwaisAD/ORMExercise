@@ -1,4 +1,6 @@
+import DTOs.SemesterDTO;
 import DTOs.StudentInfoDTO;
+import DTOs.TeacherDTO;
 import entities.Semester;
 import entities.Student;
 import entities.Teacher;
@@ -89,27 +91,30 @@ public class Tester {
         long amountOfStudentsForTeacher = schoolFacade.amountOfStudentsWithASpecificTeacher(teacherId);
         System.out.println("Teacher with id: " + teacherId + " has the following amount of students: " + amountOfStudentsForTeacher);
 
-        // Find (using JPQL) the teacher who teaches the most semesters. MANGLER
-        //Teacher teacher = schoolFacade.teacherWhoTeachesTheMostSemesters();
-        //System.out.println("Teacher teaching the most semesters:");
-        //System.out.println(teacher);
-        //schoolFacade.teacherWhoTeachesTheMostSemesters();
+        // Find (using JPQL) the teacher who teaches the most semesters
+        TeacherDTO teacher = schoolFacade.teacherWhoTeachesTheMostSemesters();
+        System.out.println("Teacher teaching the most semesters:");
+        System.out.println(teacher);
 
 
-        //Find the semester that has the fewest students MANGLER
-        /*List<Semester> listbla = schoolFacade.semesterWithFewestStudents();
+        //Find the semester that has the fewest students
+        SemesterDTO semester = schoolFacade.semesterWithFewestStudents();
         System.out.println("Semester with fewest students:");
-        for (Semester semester : listbla) {
-            System.out.println(semester);
-        }*/
+        System.out.println(semester);
 
-        List<StudentInfoDTO> studentInfoDTO = schoolFacade.getStudentInfo(1);
-        System.out.println("DTO test");
+
+        // Testing done on methods in facade that shows the way of creating DTO classes that
+        // allows for building queries retrieving a lot of different data
+
+        /*List<StudentInfoDTO> studentInfoDTO = schoolFacade.getStudentInfo();
+        System.out.println("DTO test af liste af studerende");
         for (StudentInfoDTO infoDTO : studentInfoDTO) {
             System.out.println(infoDTO);
         }
 
-
+        StudentInfoDTO studentInfoDTO1 = schoolFacade.getStudentInfo(1);
+        System.out.println("Another DTO test af en enkelt studerende");
+        System.out.println(studentInfoDTO1);*/
 
         emf.close();
     }

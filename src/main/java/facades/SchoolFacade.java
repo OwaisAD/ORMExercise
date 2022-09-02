@@ -1,6 +1,8 @@
 package facades;
 
+import DTOs.SemesterDTO;
 import DTOs.StudentInfoDTO;
+import DTOs.TeacherDTO;
 import entities.Semester;
 import entities.Student;
 import entities.Teacher;
@@ -198,35 +200,62 @@ public class SchoolFacade {
         }
     }
 
-    // Find (using JPQL) the teacher who teaches the most semesters. SKAL JEG LAVE EN DTO som return type?
-    public void teacherWhoTeachesTheMostSemesters() {
+    // Find (using JPQL) the teacher who teaches the most semesters.
+    public TeacherDTO teacherWhoTeachesTheMostSemesters() {
         EntityManager em = emf.createEntityManager();
         try {
-            TypedQuery<Teacher> query = em.createQuery("SELECT count(s) as amount, t.firstname from Semester s JOIN s.teachers t GROUP BY t.id ORDER BY amount DESC", Teacher.class);
-            // hvordan finder man ud af hvilken objekt type vi har med at gøre?
-            System.out.println(query.getResultList());
-            //return ;
+            // måske få den første underviser ud og derefter brug setter til at sætte hans amountOfSemesters?!
+            TypedQuery<TeacherDTO> query = em.createQuery("SELECT NEW DTOs.TeacherDTO(t.firstname, t.lastname, t.id, count(s)) as amount FROM Semester s JOIN s.teachers t GROUP BY t.id", TeacherDTO.class);
+            List<TeacherDTO> listOfTeachers = query.getResultList();
+            TeacherDTO currMostSemesterTeacher = listOfTeachers.get(0);
+            for (TeacherDTO teacher : listOfTeachers) {
+                if(teacher.getAmountOfSemesters() > currMostSemesterTeacher.getAmountOfSemesters()) {
+                    currMostSemesterTeacher = teacher;
+                }
+            }
+            return currMostSemesterTeacher;
         } finally {
             em.close();
         }
     }
 
     // Find the semester that has the fewest students
-    /*public List<Semester> semesterWithFewestStudents() {
+    public SemesterDTO semesterWithFewestStudents() {
         EntityManager em = emf.createEntityManager();
         try {
-            TypedQuery<Semester> query = em.createQuery("SELECT count(sem) as amount, sem.name FROM Semester sem JOIN sem.students st GROUP BY sem.id ORDER BY amount ASC", Semester.class);
-            return query.getResultList();
-
+            TypedQuery<SemesterDTO> query = em.createQuery("SELECT NEW DTOs.SemesterDTO(sem.id, sem.description, sem.name, count(sem)) FROM Semester sem JOIN sem.students st GROUP BY sem.id", SemesterDTO.class);
+            List<SemesterDTO> listOfSemesters = query.getResultList();
+            SemesterDTO currSemesterWithLeastStudents = listOfSemesters.get(0);
+            for (SemesterDTO semester : listOfSemesters) {
+                if(semester.getSemesterStudentCount() < currSemesterWithLeastStudents.getSemesterStudentCount()) {
+                    currSemesterWithLeastStudents = semester;
+                }
+            }
+            return currSemesterWithLeastStudents;
         } finally {
             em.close();
-        }*/
+        }
+    }
 
-    public List<StudentInfoDTO> getStudentInfo(int studentId) {
+
+    // Following 2 methods - showing the way we can use DTOs to retrieve larger data sets from our queries
+    public List<StudentInfoDTO> getStudentInfo() {
         EntityManager em = emf.createEntityManager();
         try {
             TypedQuery<StudentInfoDTO> query = em.createQuery("SELECT NEW DTOs.StudentInfoDTO(CONCAT(s.firstname, ' ', s.lastname), s.id, s.currentsemester.name, s.currentsemester.description) FROM Student s", StudentInfoDTO.class);
             List<StudentInfoDTO> result = query.getResultList();
+            return result;
+        }finally {
+            em.close();
+        }
+    }
+
+    public StudentInfoDTO getStudentInfo(int studentId) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            TypedQuery<StudentInfoDTO> query = em.createQuery("SELECT NEW DTOs.StudentInfoDTO(CONCAT(s.firstname, ' ', s.lastname), s.id, s.currentsemester.name, s.currentsemester.description) FROM Student s WHERE s.id = :id", StudentInfoDTO.class);
+            query.setParameter("id", studentId);
+            StudentInfoDTO result = query.getSingleResult();
             return result;
         }finally {
             em.close();
