@@ -1,11 +1,13 @@
 package facades;
 
+import DTOs.StudentInfoDTO;
 import entities.Semester;
 import entities.Student;
 import entities.Teacher;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import java.util.List;
 import java.util.Set;
@@ -196,12 +198,13 @@ public class SchoolFacade {
         }
     }
 
-    // Find (using JPQL) the teacher who teaches the most semesters.
-    public Teacher teacherWhoTeachesTheMostSemesters() {
+    // Find (using JPQL) the teacher who teaches the most semesters. SKAL JEG LAVE EN DTO som return type?
+    public void teacherWhoTeachesTheMostSemesters() {
         EntityManager em = emf.createEntityManager();
         try {
-            TypedQuery<Teacher> query = em.createQuery("SELECT count(s) as amount, t.firstname as TeacherName from Semester s JOIN s.teachers t GROUP BY t.id ORDER BY amount DESC", Teacher.class);
+            TypedQuery<Teacher> query = em.createQuery("SELECT count(s) as amount, t.firstname from Semester s JOIN s.teachers t GROUP BY t.id ORDER BY amount DESC", Teacher.class);
             // hvordan finder man ud af hvilken objekt type vi har med at gøre?
+            System.out.println(query.getResultList());
             //return ;
         } finally {
             em.close();
@@ -209,16 +212,26 @@ public class SchoolFacade {
     }
 
     // Find the semester that has the fewest students
-    public Semester semesterWithFewestStudents() {
+    /*public List<Semester> semesterWithFewestStudents() {
         EntityManager em = emf.createEntityManager();
         try {
             TypedQuery<Semester> query = em.createQuery("SELECT count(sem) as amount, sem.name FROM Semester sem JOIN sem.students st GROUP BY sem.id ORDER BY amount ASC", Semester.class);
-            List<Semester> list = query.getResultList();
-            Semester semester = list.get(0);
-            return semester;
+            return query.getResultList();
+
         } finally {
+            em.close();
+        }*/
+
+    public List<StudentInfoDTO> getStudentInfo(int studentId) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            TypedQuery<StudentInfoDTO> query = em.createQuery("SELECT NEW DTOs.StudentInfoDTO(CONCAT(s.firstname, ' ', s.lastname), s.id, s.currentsemester.name, s.currentsemester.description) FROM Student s", StudentInfoDTO.class);
+            List<StudentInfoDTO> result = query.getResultList();
+            return result;
+        }finally {
             em.close();
         }
     }
 
-}
+    }
+

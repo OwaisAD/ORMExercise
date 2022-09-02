@@ -1,3 +1,4 @@
+import DTOs.StudentInfoDTO;
 import entities.Semester;
 import entities.Student;
 import entities.Teacher;
@@ -89,14 +90,26 @@ public class Tester {
         System.out.println("Teacher with id: " + teacherId + " has the following amount of students: " + amountOfStudentsForTeacher);
 
         // Find (using JPQL) the teacher who teaches the most semesters. MANGLER
-        Teacher teacher = schoolFacade.teacherWhoTeachesTheMostSemesters();
-        System.out.println("Teacher teaching the most semesters:");
-        System.out.println(teacher);
+        //Teacher teacher = schoolFacade.teacherWhoTeachesTheMostSemesters();
+        //System.out.println("Teacher teaching the most semesters:");
+        //System.out.println(teacher);
+        //schoolFacade.teacherWhoTeachesTheMostSemesters();
+
 
         //Find the semester that has the fewest students MANGLER
-        Semester semester = schoolFacade.semesterWithFewestStudents();
+        /*List<Semester> listbla = schoolFacade.semesterWithFewestStudents();
         System.out.println("Semester with fewest students:");
-        System.out.println(semester);
+        for (Semester semester : listbla) {
+            System.out.println(semester);
+        }*/
+
+        List<StudentInfoDTO> studentInfoDTO = schoolFacade.getStudentInfo(1);
+        System.out.println("DTO test");
+        for (StudentInfoDTO infoDTO : studentInfoDTO) {
+            System.out.println(infoDTO);
+        }
+
+
 
         emf.close();
     }
